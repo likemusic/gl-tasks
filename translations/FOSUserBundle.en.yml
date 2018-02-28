@@ -1,0 +1,7 @@
+security:
+    login:
+        email: Email Address
+        submit: 'Submit'
+
+registration:
+    submit: 'Submit'

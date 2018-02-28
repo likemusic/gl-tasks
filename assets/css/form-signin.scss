@@ -1,0 +1,30 @@
+/* sign in form */
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.form-signin h1 {
+  margin-bottom: 30px;
+}
+
+.form-signin .form-control {
+  padding: 10px;
+  font-size: 16px;
+  height: auto;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

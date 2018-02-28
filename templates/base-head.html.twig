@@ -1,0 +1,24 @@
+<div class="header clearfix">
+    <nav>
+        <ul class="nav nav-pills pull-left">
+            <li role="presentation" class="active"><a href="{{ path('fos_user_registration_confirmed') }}">Home</a></li>
+        </ul>
+    </nav>
+
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            {% if app.user %}
+                <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+            {% else %}
+                <li role="presentation"><a href="{{ path('fos_user_security_login') }}">Sign in</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% if app.user %}
+        <div class="greeter pull-right">
+            Hi, {{ app.user.email }}!
+        </div>
+    {% endif %}
+
+</div>

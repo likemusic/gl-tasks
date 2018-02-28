@@ -4,7 +4,11 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 body {
   background-color: #eee;
-  padding-top: 3em;
+  padding-top: 1em;
+}
+
+.header .greeter {
+  padding: $nav-link-padding;
 }
 
 @import 'form-signin';

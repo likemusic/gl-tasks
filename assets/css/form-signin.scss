@@ -3,7 +3,7 @@
 .form-signin {
   max-width: 330px;
   padding: 15px;
-  margin: 0 auto;
+  margin: 3em auto 0;
   background-color: #fff;
 }
 
@@ -27,4 +27,8 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.login-link-wrapper {
+  margin: 1em 0;
 }

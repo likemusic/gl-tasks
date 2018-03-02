@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View{% endblock %}
+
+{% block body %}
+    <div class="task task-view">
+    <h1>View</h1>
+
+    <h2>Description:</h2>
+    <section>
+        <p>
+            {{ task.description }}
+        </p>
+    </section>
+
+    <h2>Executors:</h2>
+    <section>
+        {% if task.executors is not empty %}
+            <ul>
+                {% for executor in task.executors %}
+                    <li>{{ executor.email }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>There is no executors.</p>
+        {% endif %}
+    </section>
+
+    <h2>Comments:</h2>
+    <section class="comments">
+        {% if task.comments is not empty %}
+            {% for comment in task.comments %}
+                <article class="comment">
+                    <header>{{ comment.author.email }} {{ comment.date|date('Y-m-d H-i-s') }}</header>
+                    <div>{{ comment.text }}</div>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>There is no comments.</p>
+        {% endif %}
+
+        <h3>Add your comment</h3>
+        {{ form(commentForm) }}
+    </section>
+{% endblock %}

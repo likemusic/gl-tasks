@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New task{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/task-executors.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="task task-new">
+        <h1>New task</h1>
+
+        {{ form(form) }}
+        <a href="{{ path('task_list') }}" class="btn btn-default">Cancel</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'task.edit'|trans({'%id%': task.id}) }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/task-executors.js') }}"></script>
+{% endblock %}
+
+
+{% block body %}
+    <div class="task task-edit">
+        <h1>{{ 'task.edit'|trans({'%id%': task.id}) }}</h1>
+
+        {{ form(form) }}
+        <a href="{{ path('task_list') }}" class="btn btn-default">Cancel</a>
+    </div>
+{% endblock %}

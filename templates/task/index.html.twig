@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block body %}
+    <div class="task task-list">
+        <h1>✅ Tasks <a href="{{ path('task_new') }}" class="btn btn-primary pull-right">Create task</a></h1>
+
+        {% if tasksInfo is not empty %}
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Task name</th>
+                    <th>User with max comment</th>
+                    <th>Max comment length</th>
+                    <th>Actions</th>
+                </tr>
+                {% for taskInfo in tasksInfo %}
+                    <tr>
+                        <td><a href="{{ path('task_view', {id: taskInfo.taskId}) }}">{{ taskInfo.taskName }}</a></td>
+                        <td>{{ taskInfo.commentLength }}</td>
+                        <td>{{ taskInfo.commentAuthorEmail }}</td>
+                        <td><a href="{{ path('task_edit', {id: taskInfo.taskId}) }}" class="btn btn-primary">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="empty-list-message">{{ 'task.empty_list'|trans }}</div>
+        {% endif %}
+    </div>
+{% endblock %}

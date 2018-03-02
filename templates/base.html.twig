@@ -9,7 +9,9 @@
     </head>
     <body>
         <div class="container">
-            {% include "base-head.html.twig" %}
+            {% block head %}{% include "base-head.html.twig" %}{% endblock %}
+            {% include "base-flash-messages.html.twig" %}
+
             {% block body %}{% endblock %}
         </div>
         {% block javascripts %}

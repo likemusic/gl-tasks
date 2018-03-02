@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,6 +17,8 @@ class Task
 	const STATUS_COMPLETE = 3;
 
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -23,7 +26,7 @@ class Task
     private $id;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="string")
 	 * @Assert\NotBlank
@@ -31,7 +34,7 @@ class Task
 	private $name;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="text")
 	 */
@@ -54,7 +57,7 @@ class Task
 	private $author;
 
 	/**
-	 * @var Comment[]|ArrayCollection
+	 * @var Comment[]|Collection
 	 *
 	 * @ORM\OneToMany(
 	 *      targetEntity="Comment",
@@ -67,11 +70,11 @@ class Task
 	private $comments;
 
 	/**
-	 * @var User[]|ArrayCollection
+	 * @var User[]|Collection
 	 *
 	 * @ORM\ManyToMany(targetEntity="App\Entity\User")
 	 * @ORM\JoinTable(name="task_executor")
-	 * @ORM\OrderBy({"name": "ASC"})
+	 * @ORM\OrderBy({"email": "ASC"})
 	 */
 	private $executors;
 
@@ -85,15 +88,16 @@ class Task
 
 	public function __construct()
 	{
+		$this->status = self::STATUS_NEW;
 		$this->date = new \DateTime();
 		$this->comments = new ArrayCollection();
 		$this->executors = new ArrayCollection();
 	}
 
 	/**
-	 * @return mixed
+	 * @return int|null
 	 */
-	public function getId()
+	public function getId(): ?int
 	{
 		return $this->id;
 	}
@@ -101,7 +105,7 @@ class Task
 	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}
@@ -117,9 +121,9 @@ class Task
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getDescription(): string
+	public function getDescription(): ?string
 	{
 		return $this->description;
 	}
@@ -171,15 +175,15 @@ class Task
 	}
 
 	/**
-	 * @return Comment[]|ArrayCollection
+	 * @return Comment[]|Collection
 	 */
-	public function getComments()
+	public function getComments(): Collection
 	{
 		return $this->comments;
 	}
 
 	/**
-	 * @param Comment[]|ArrayCollection $comments
+	 * @param Comment[]|Collection $comments
 	 * @return Task
 	 */
 	public function setComments($comments)
@@ -189,9 +193,9 @@ class Task
 	}
 
 	/**
-	 * @return User[]|ArrayCollection
+	 * @return User[]|Collection
 	 */
-	public function getExecutors()
+	public function getExecutors(): Collection
 	{
 		return $this->executors;
 	}
@@ -203,6 +207,18 @@ class Task
 	public function setExecutors($executors)
 	{
 		$this->executors = $executors;
+		return $this;
+	}
+
+	public function addExecutor(User $user)
+	{
+		$this->executors->add($user);
+		return $this;
+	}
+
+	public function removeExecutor(User $user)
+	{
+		$this->executors->removeElement($user);
 		return $this;
 	}
 

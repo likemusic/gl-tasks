@@ -67,7 +67,7 @@ class Comment
 	/**
 	 * @return string
 	 */
-	public function getText(): string
+	public function getText(): ?string
 	{
 		return $this->text;
 	}
@@ -85,7 +85,7 @@ class Comment
 	/**
 	 * @return \DateTime
 	 */
-	public function getDate(): \DateTime
+	public function getDate(): ?\DateTime
 	{
 		return $this->date;
 	}
@@ -103,7 +103,7 @@ class Comment
 	/**
 	 * @return User
 	 */
-	public function getAuthor(): User
+	public function getAuthor(): ?User
 	{
 		return $this->author;
 	}

@@ -3,12 +3,21 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 body {
-  background-color: #eee;
-  padding-top: 1em;
+  background-color: #fff;
+  padding: 1em 0;
 }
 
 .header .greeter {
   padding: $nav-link-padding;
 }
 
+.flash-messages {
+  margin: 1em 0;
+}
+
+.flash-messages p {
+  padding: 1em;
+}
+
 @import 'form-signin';
+@import 'task';

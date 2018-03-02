@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Comment;
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -14,21 +15,37 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TaskRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, Task::class);
-    }
+	public function __construct(RegistryInterface $registry)
+	{
+		parent::__construct($registry, Task::class);
+	}
 
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->where('t.something = :value')->setParameter('value', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	public function getPivotData()
+	{
+		$commentClass = Comment::class;
+		$taskClass = Task::class;
+
+		$dqlQuery = <<<EOT
+SELECT t.id taskId, t.name taskName, a.id commentId, LENGTH(a.text) commentLength, ath.email commentAuthorEmail
+FROM {$taskClass} t
+LEFT JOIN t.comments a
+LEFT JOIN {$commentClass} b
+    WITH a.task = b.task
+    AND LENGTH(a.text) < LENGTH(b.text)
+LEFT JOIN {$commentClass} c
+    WITH a.task = c.task
+    AND LENGTH(a.text) = LENGTH(c.text)
+    AND a.date < c.date
+LEFT JOIN a.author ath
+WHERE
+	b IS NULL
+	AND c IS NULL
+GROUP BY a.task
+EOT;
+
+		return $this
+			->getEntityManager()
+			->createQuery($dqlQuery)
+			->getResult();
+	}
 }

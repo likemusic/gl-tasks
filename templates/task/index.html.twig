@@ -18,8 +18,8 @@
                 {% for taskInfo in tasksInfo %}
                     <tr>
                         <td><a href="{{ path('task_view', {id: taskInfo.taskId}) }}">{{ taskInfo.taskName }}</a></td>
-                        <td>{{ taskInfo.commentLength }}</td>
-                        <td>{{ taskInfo.commentAuthorEmail }}</td>
+                        <td>{{ taskInfo.commentLength ? taskInfo.commentLength : '' }}</td>
+                        <td>{{ taskInfo.commentAuthorEmail ? taskInfo.commentAuthorEmail : 'no comments' }}</td>
                         <td><a href="{{ path('task_edit', {id: taskInfo.taskId}) }}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>

@@ -3,7 +3,7 @@ $(document).ready(function () {
     var addItemLinkContainerSelector = function ($) {
         return $('#task_executors').siblings('label');
     };
-    var $addItemLink = $('<a href="#" class="btn btn-primary pull-right">Add executor</a>');
+    var $addItemLink = $('<a href="#" class="btn btn-primary pull-right add-item">Add executor</a>');
     var $collectionHolder = $('#task_executors');
 
     $addItemLink.click(function (e) {

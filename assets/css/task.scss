@@ -1,7 +1,14 @@
 .task {
+  position: relative;
+
   .comments {
     .comment {
       margin: 0.5em 0;
     }
+  }
+
+  .add-item {
+    position: absolute;
+    right: 0;
   }
 }

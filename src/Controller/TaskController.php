@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends Controller
 {
 	/**
-	 * @Route("/", name="task_list")
+	 * @Route("/", name="task_index")
 	 * @param TaskRepository $taskRepository
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */

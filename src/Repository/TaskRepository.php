@@ -40,7 +40,7 @@ LEFT JOIN a.author ath
 WHERE
 	b IS NULL
 	AND c IS NULL
-GROUP BY a.task
+GROUP BY t
 EOT;
 
 		return $this

@@ -69,7 +69,7 @@ class TaskController extends Controller
 
 			$this->addFlash('success', 'task.created_successfully');
 
-			return $this->redirectToRoute('task_list');
+			return $this->redirectToRoute('task_index');
 		}
 
 		return $this->render('task/new.html.twig', [

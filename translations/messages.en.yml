@@ -1,5 +1,6 @@
 task:
-    edit: 'Edit post #%id%'
+    edit: 'Edit task #%id%'
+    view: 'Edit task #%id%'
     empty_list: 'Tasks not found'
     created_successfully: 'Task created successfully'
     updated_successfully: 'Task updated successfully'

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class TaskController
@@ -85,9 +86,10 @@ class TaskController extends Controller
 	 * @Method({"GET", "POST"})
 	 * @param Request $request
 	 * @param Task $task
+	 * @param TranslatorInterface $translator
 	 * @return Response
 	 */
-	public function edit(Request $request, Task $task): Response
+	public function edit(Request $request, Task $task, TranslatorInterface $translator): Response
 	{
 		$form = $this->createForm(TaskType::class, $task);
 		$form->add('submit', SubmitType::class, [
@@ -100,7 +102,7 @@ class TaskController extends Controller
 		if ($form->isSubmitted() && $form->isValid()) {
 			$this->getDoctrine()->getManager()->flush();
 
-			$this->addFlash('success', 'task.updated_successfully');
+			$this->addFlash('success', $translator->trans('task.updated_successfully'));
 
 			return $this->redirectToRoute('task_edit', ['id' => $task->getId()]);
 		}
@@ -116,9 +118,10 @@ class TaskController extends Controller
 	 * @Method({"GET", "POST"})
 	 * @param Task $task
 	 * @param Request $request
+	 * @param TranslatorInterface $translator
 	 * @return Response
 	 */
-	public function view(Task $task, Request $request): Response
+	public function view(Task $task, Request $request, TranslatorInterface $translator): Response
 	{
 		$comment = new Comment();
 		$comment->setAuthor($this->getUser());
@@ -138,7 +141,7 @@ class TaskController extends Controller
 			$em->persist($comment);
 			$em->flush();
 
-			$this->addFlash('success', 'task.comment.created_successfully');
+			$this->addFlash('success', $translator->trans('task.comment.created_successfully'));
 
 			return $this->redirectToRoute('task_view', ['id' => $task->getId()]);
 		}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}View{% endblock %}
+{% block title %}{{ 'task.view'|trans({'%id%': task.id}) }}{% endblock %}
 
 {% block body %}
     <div class="task task-view">

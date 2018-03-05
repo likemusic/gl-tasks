@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="task task-view">
-    <h1>View</h1>
+    <h1>{{ 'task.view'|trans({'%id%': task.id}) }}</h1>
 
     <h2>Description:</h2>
     <section>
